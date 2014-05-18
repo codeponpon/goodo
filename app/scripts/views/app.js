@@ -4,29 +4,37 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
-    'use strict';
+    'templates',
+    'common',
+    'collections/goodoList'
+], function ($, _, Backbone, JST, Common, GoodoList) {
+  'use strict';
 
-    var AppView = Backbone.View.extend({
-        template: JST['app/scripts/templates/app.ejs'],
+  var AppView = Backbone.View.extend({
+    /**
+     * Application Template
+     */
+    header: JST['app/scripts/templates/header.ejs'],
+    template: JST['app/scripts/templates/app.ejs'],
+    footer: JST['app/scripts/templates/footer.ejs'],
 
-        tagName: 'div',
+    events: {},
 
-        id: '',
+    initialize: function () {
+      // this.listenTo(GoodoList, 'all', this.render);
+      this.$content = $('.content');
+      this.$header = $('.header');
+      this.$footer = $('.footer');
+      this.render();
+    },
 
-        className: '',
+    render: function () {
+      this.$header.append(this.header(Common));
+      this.$content.append(this.template(GoodoList.toJSON()));
 
-        events: {},
+      this.$footer.append(this.footer);
+    }
+  });
 
-        initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
-        },
-
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-        }
-    });
-
-    return AppView;
+  return AppView;
 });

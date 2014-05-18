@@ -3,13 +3,15 @@
 define([
     'underscore',
     'backbone',
+    'localstorage',
     'models/goodo'
-], function (_, Backbone, GoodoListModel) {
+], function (_, Backbone, Storage, Goodo) {
     'use strict';
 
-    var GoodoListCollection = Backbone.Collection.extend({
-        model: GoodoListModel
+    var GoodoList = Backbone.Collection.extend({
+      model: Goodo,
+      localStorage: new Storage('goodos-data')
     });
 
-    return GoodoListCollection;
+    return new GoodoList();
 });

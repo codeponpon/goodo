@@ -1,27 +1,29 @@
 /*global define*/
 
 define([
-    'underscore',
-    'backbone'
+  'underscore',
+  'backbone'
 ], function (_, Backbone) {
-    'use strict';
+  'use strict';
 
-    var GoodoModel = Backbone.Model.extend({
-        url: '',
+  var Goodo = Backbone.Model.extend({
+    url: '',
 
-        initialize: function() {
-        },
+    initialize: function() {
+    },
 
-        defaults: {
-        },
+    defaults: {
+      title: '',
+      completed: false
+    },
 
-        validate: function(attrs, options) {
-        },
+    validate: function(attrs, options) {
+    },
 
-        parse: function(response, options)  {
-            return response;
-        }
-    });
+    parse: function(response, options)  {
+      return response;
+    }
+  });
 
-    return GoodoModel;
+  return Goodo;
 });
