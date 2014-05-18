@@ -14,25 +14,25 @@ define([
     /**
      * Application Template
      */
-    header: JST['app/scripts/templates/header.ejs'],
+    header: new EJS({url: 'scripts/templates/header.ejs'}),
     template: JST['app/scripts/templates/app.ejs'],
     footer: JST['app/scripts/templates/footer.ejs'],
 
     events: {},
 
     initialize: function () {
-      // this.listenTo(GoodoList, 'all', this.render);
       this.$content = $('.content');
       this.$header = $('.header');
       this.$footer = $('.footer');
+      Backbone.history.on('route',function(source, path){
+        this.render(path);
+      }, this);
       this.render();
     },
 
-    render: function () {
-      this.$header.append(this.header(Common));
-      this.$content.append(this.template(GoodoList.toJSON()));
-
-      this.$footer.append(this.footer);
+    render: function (path) {
+      this.$content.html(this.template(GoodoList.toJSON()));
+      this.$footer.html(this.footer);
     }
   });
 

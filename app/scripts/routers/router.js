@@ -7,23 +7,18 @@ define([
 ], function ($, Backbone, AppView) {
   'use strict';
 
-  var Router = Backbone.Router.extend({
+  var Workspace = Backbone.Router.extend({
     routes: {
-      '': 'index',
-      '#about': 'about',
-      '#contact': 'contact'
+      'index': 'index',
+      'about': 'about'
     },
 
     index: function(){
-      console.log('Index');
     },
 
     about: function(){
-    },
-
-    contact: function(){
     }
   });
 
-  return Router;
+  return Workspace;
 });

@@ -22,18 +22,20 @@ require.config({
 require([
   'backbone',
   'routers/router',
+  'views/navBar',
   'views/app',
   'embeddedjs',
-], function (Backbone, Router, AppView) {
+], function (Backbone, Workspace, NavBar, AppView) {
   /**
    * Initialize routing and start Backbone.history()
    */
-  new Router();
-  Backbone.history.start({pushState: true});
+  new Workspace();
+  Backbone.history.start();
 
   /**
    * Initialize the application view
    */
   new AppView();
+  new NavBar({el: $('.nav') });
   console.log('Hello from Backbone!');
 });

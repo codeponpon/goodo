@@ -3,7 +3,9 @@
  */
 define([], function(){
   'use strict';
+
   return {
-   appName: 'GooDoo'
+    appName: 'GooDo',
+    menuActive: 'index'
   };
 })
