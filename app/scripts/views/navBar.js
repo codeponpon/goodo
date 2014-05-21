@@ -10,6 +10,14 @@ define([
   'use strict';
 
   var NavBar = Backbone.View.extend({
+    header: new EJS({url: 'scripts/templates/header.ejs'}),
+    //This is a collection of possible routes and their accompanying
+    //user-friendly titles
+    titles: {
+      "index":"Home",
+      "about":"About"
+    },
+
     initialize:function(options){
       Common.menuActive = _.isEmpty(Backbone.history.fragment) ? 'index' : Backbone.history.fragment;
       this.$el.html(this.header.render(Common));
@@ -18,19 +26,9 @@ define([
       }, this);
     },
 
-    header: new EJS({url: 'scripts/templates/header.ejs'}),
-
-    //This is a collection of possible routes and their accompanying
-    //user-friendly titles
-    titles: {
-      "index":"Home",
-      "about":"About"
-    },
-
     events:{
       'click a':function(source) {
         var hrefRslt = source.target.getAttribute('href');
-        console.log(hrefRslt);
         Backbone.history.navigate(hrefRslt, {trigger:true});
         //Cancel the regular event handling so that we won't actual change URLs
         //We are letting Backbone handle routing
@@ -44,8 +42,6 @@ define([
       var template = _.template("<li class='<%=active%>'><a href='#<%=url%>'><%=visible%></a></li>");
       for (var key in this.titles)
       {
-        console.log(route);
-        console.log(key);
         this.$el.append(template({url:key,visible:this.titles[key],active:route === key ? 'active' : ''}));
       }
 

@@ -9,7 +9,7 @@ require.config({
     localstorage : { deps: ['backbone'], exports: 'Storage' }
   },
   paths: {
-    jquery       : '../bower_components/jquery/jquery',
+    jquery       : '../bower_components/jquery/dist/jquery',
     backbone     : '../bower_components/backbone/backbone',
     underscore   : '../bower_components/underscore/underscore',
     bootstrap    : 'vendor/bootstrap',
@@ -35,7 +35,7 @@ require([
   /**
    * Initialize the application view
    */
-  new AppView();
   new NavBar({el: $('.nav') });
+  new AppView();
   console.log('Hello from Backbone!');
 });

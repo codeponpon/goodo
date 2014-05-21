@@ -14,15 +14,16 @@ define([
     /**
      * Application Template
      */
-    header: new EJS({url: 'scripts/templates/header.ejs'}),
-    template: JST['app/scripts/templates/app.ejs'],
-    footer: JST['app/scripts/templates/footer.ejs'],
+    template: {
+      app: new EJS({url: 'scripts/templates/app.ejs'}),
+      about: new EJS({url: 'scripts/templates/about.ejs'})
+    },
+    footer   : JST['app/scripts/templates/footer.ejs'],
 
-    events: {},
+    events   : {},
 
     initialize: function () {
       this.$content = $('.content');
-      this.$header = $('.header');
       this.$footer = $('.footer');
       Backbone.history.on('route',function(source, path){
         this.render(path);
@@ -31,7 +32,19 @@ define([
     },
 
     render: function (path) {
-      this.$content.html(this.template(GoodoList.toJSON()));
+      if(path === undefined){
+        path = Backbone.history.fragment;
+      }
+      switch(path){
+        case 'about':
+          this.$content.html(this.template.about.render(GoodoList.toJSON()));
+          break;
+        default:
+          this.$content.html(this.template.app.render(GoodoList.toJSON()));
+          break;
+      }
+
+      // Footer
       this.$footer.html(this.footer);
     }
   });

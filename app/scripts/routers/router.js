@@ -11,12 +11,6 @@ define([
     routes: {
       'index': 'index',
       'about': 'about'
-    },
-
-    index: function(){
-    },
-
-    about: function(){
     }
   });
 
