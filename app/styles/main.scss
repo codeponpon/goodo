@@ -13,58 +13,51 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    background: #eee;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Custom page header */
 .header {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  h1 {
+    position: absolute;
+    top: -75px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+  }
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+      margin-top: 0;
     margin-bottom: 0;
     line-height: 40px;
     padding-bottom: 19px;
+  }
 }
 
 /* Custom page footer */
 .footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
+.row {
+  margin: 10px 0 5px;
 }
 
 /* Responsive: Portrait tablets and up */
