@@ -6,8 +6,9 @@ define([
     'backbone',
     'templates',
     'common',
-    'collections/goodoList'
-], function ($, _, Backbone, JST, Common, GoodoList) {
+    'collections/goodoList',
+    'views/goodoView'
+], function ($, _, Backbone, JST, Common, GoodoList, GoodoView) {
   'use strict';
 
   var AppView = Backbone.View.extend({
@@ -31,7 +32,9 @@ define([
      * Delegated events for creating new items, and clearing completed ones.
      */
     events: {
-      'keypress #new-goodo': 'createOnEnter'
+      'keypress #new-goodo'    : 'createOnEnter',
+      'click #clear-completed' : 'clearCompleted',
+      'click #toggle-all'      : 'toggleAllComplete'
     },
 
     initialize: function () {
@@ -58,7 +61,8 @@ define([
      * Add a single todo item to the list by creating a view for it, and appending its element to the `<ul>`.
      */
     addOne: function(goodo){
-      $('#goodo-list').append( this.template.item.render(goodo.toJSON()) );
+      var view = new GoodoView({ model: goodo });
+      $('#goodo-list').append( view.render().el );
     },
 
 
