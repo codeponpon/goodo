@@ -22,7 +22,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="header">
       <ul class="nav nav-pills pull-right"></ul>
       <h3 class="text-muted">GooDo</h3>
@@ -32,9 +32,23 @@
 
     <div class="footer"></div>
 
+  </div> -->
+
+  <section id="todoapp">
+    <header id="header">
+      <h1>GooDo</h1>
+      <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+    <section id="main">
+      <input id="toggle-all" type="checkbox">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="todo-list"></ul>
+    </section>
+    <footer id="footer"></footer>
+  </section>
+  <div id="info">
+    <p>Tutorial BacboneJS</p>
   </div>
-
-
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
