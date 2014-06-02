@@ -20,8 +20,9 @@ define([
      * Application Template
      */
     template: {
-      app: new EJS({url: 'scripts/templates/app.ejs'}),
-      about: new EJS({url: 'scripts/templates/about.ejs'})
+      app   : new EJS({url: 'scripts/templates/app.ejs'}),
+      about : new EJS({url: 'scripts/templates/about.ejs'}),
+      item  : new EJS({url: 'scripts/templates/item.ejs'})
     },
 
     footer   : JST['app/scripts/templates/footer.ejs'],
@@ -38,6 +39,15 @@ define([
       this.$content    = this.$('.content');
       this.$footer     = this.$('.footer');
       this.$input      = this.$('#new-goodo');
+      this.$main       = this.$('#main');
+
+      this.listenTo(GoodoList, 'add', this.addOne);
+      this.listenTo(GoodoList, 'reset', this.addAll);
+
+      this.listenTo(GoodoList, 'change:completed', this.filterOne);
+      this.listenTo(GoodoList, 'filter', this.filterAll);
+      this.listenTo(GoodoList, 'all', this.render);
+
       Backbone.history.on('route',function(source, path){
         this.render(path);
       }, this);
@@ -48,8 +58,7 @@ define([
      * Add a single todo item to the list by creating a view for it, and appending its element to the `<ul>`.
      */
     addOne: function(goodo){
-      var view = new GoodoView({ model: goodo });
-      $('#goodo-list').append( view.render().el );
+      $('#goodo-list').append( this.template.item.render(goodo.toJSON()) );
     },
 
 
@@ -63,6 +72,7 @@ define([
 
 
     render: function (path) {
+      this.$('#header').prepend('<h1>'+Common.appName+'</H1>');
       if(path === undefined){
         path = Backbone.history.fragment;
       }
@@ -100,6 +110,32 @@ define([
 
       GoodoList.create( this.newAttributes() );
       this.$input.val('');
+    },
+
+    filterOne : function (goodo) {
+      goodo.trigger('visible');
+    },
+
+    filterAll : function () {
+      GoodoList.each(this.filterOne, this);
+    },
+
+    /**
+     * Clear all completed todo items, destroying their models.
+     */
+    clearCompleted: function() {
+      _.invoke(GoodoList.completed(), 'destroy');
+      return false;
+    },
+
+    toggleAllComplete: function() {
+      var completed = this.allCheckbox.checked;
+
+      GoodoList.each(function( goodo ) {
+        goodo.save({
+          'completed': completed
+        });
+      });
     }
 
   });
