@@ -7,21 +7,25 @@ define([
   'use strict';
 
   var Goodo = Backbone.Model.extend({
-    url: '',
 
     initialize: function() {
     },
 
+    /**
+     * Default attributes ensure that each todo created has `title` and `completed` keys.
+     */
     defaults: {
       title: '',
       completed: false
     },
 
-    validate: function(attrs, options) {
-    },
-
-    parse: function(response, options)  {
-      return response;
+    /**
+     * Toggle the `completed` state of this todo item.
+     */
+    toggle: function(){
+      this.save({
+        completed: !this.get('completed')
+      });
     }
   });
 

@@ -5,7 +5,9 @@ define([], function(){
   'use strict';
 
   return {
-    appName: 'GooDo',
-    menuActive: 'index'
+    appName    : 'GooDo',
+    menuActive : 'index',
+    enter_key  : 13,
+    localStorageKey: 'goodo-data'
   };
 })
