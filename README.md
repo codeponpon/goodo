@@ -1,10 +1,7 @@
 # Todo app using Backbone.js, RequireJS, Bootstrap, Yeoman (Grunt + Bower) #
 
-## Install and run ##
+## Run Command ##
 
-	git clone git@github.com:jesucarr/Yeoman-TodoMVC.git
-	npm install
-	bower install
 	grunt server
 
 ## Run example test ##
