@@ -250,9 +250,25 @@ label[for='toggle-all'] {
   transition: color 0.4s;
 }
 
+#goodo-list li label:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 20%;
+  border-bottom: 2px solid;
+  -webkit-transition: width 300ms cubic-bezier(.25, .46, .45, .94);
+  -moz-transition: width 300ms cubic-bezier(.25, .46, .45, .94);
+  -o-transition: width 300ms cubic-bezier(.25, .46, .45, .94);
+  transition: width 300ms cubic-bezier(.25, .46, .45, .94);
+}
+
+#goodo-list li.completed label:before {
+  width: 80%;
+}
+
 #goodo-list li.completed label {
   color: #a9a9a9;
-  text-decoration: line-through;
+  // text-decoration: line-through;
 }
 
 #goodo-list li .destroy {
