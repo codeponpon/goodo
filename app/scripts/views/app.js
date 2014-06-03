@@ -23,7 +23,8 @@ define([
     template: {
       app   : new EJS({url: 'scripts/templates/app.ejs'}),
       about : new EJS({url: 'scripts/templates/about.ejs'}),
-      item  : new EJS({url: 'scripts/templates/item.ejs'})
+      item  : new EJS({url: 'scripts/templates/item.ejs'}),
+      stats : new EJS({url: 'scripts/templates/stats.ejs'})
     },
 
     footer   : JST['app/scripts/templates/footer.ejs'],
@@ -40,7 +41,7 @@ define([
     initialize: function () {
       this.allCheckbox = this.$('#toggle-all')[0];
       this.$content    = this.$('.content');
-      this.$footer     = this.$('.footer');
+      this.$footer     = this.$('#footer');
       this.$input      = this.$('#new-goodo');
       this.$main       = this.$('#main');
 
@@ -77,20 +78,42 @@ define([
 
     render: function (path) {
       this.$('#header').prepend('<h1>'+Common.appName+'</H1>');
-      if(path === undefined){
-        path = Backbone.history.fragment;
-      }
-      switch(path){
-        case 'about':
-          this.$content.html(this.template.about.render(GoodoList.toJSON()));
-          break;
-        default:
-          this.$content.html(this.template.app.render(GoodoList.toJSON()));
-          break;
-      }
+      // if(path === undefined){
+      //   path = Backbone.history.fragment;
+      // }
+      // switch(path){
+      //   case 'about':
+      //     this.$content.html(this.template.about.render(GoodoList.toJSON()));
+      //     break;
+      //   default:
+      //     this.$content.html(this.template.app.render(GoodoList.toJSON()));
+      //     break;
+      // }
 
       // Footer
-      this.$footer.html(this.footer);
+      // this.$footer.html(this.footer);
+
+      var completed = GoodoList.completed().length;
+      var remaining = GoodoList.remaining().length;
+      if ( GoodoList.length ) {
+        this.$main.show();
+        this.$footer.show();
+
+        this.$footer.html(this.template.stats.render({
+          completed: completed,
+          remaining: remaining
+        }));
+
+        this.$('#filters li a')
+          .removeClass('selected')
+          .filter('[href="#/' + ( Common.TodoFilter || '' ) + '"]')
+          .addClass('selected');
+      } else {
+        this.$main.hide();
+        this.$footer.hide();
+      }
+
+      this.allCheckbox.checked = !remaining;
     },
 
     /**
