@@ -27,11 +27,11 @@ define([
      * The DOM events specific to an item.
      */
     events: {
-      'click .toggle': 'togglecompleted',
-      'dblclick label': 'edit',
-      'click .destroy': 'clear',
-      'keypress .edit': 'updateOnEnter',
-      'blur .edit': 'close'
+      'click .toggle'  : 'togglecompleted',
+      'dblclick label' : 'edit',
+      'click .destroy' : 'clear',
+      'keypress .edit' : 'updateOnEnter',
+      'blur .edit'     : 'close'
     },
 
     /**
