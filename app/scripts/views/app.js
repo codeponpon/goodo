@@ -50,6 +50,8 @@ define([
       this.listenTo(GoodoList, 'filter', this.filterAll);
       this.listenTo(GoodoList, 'all', this.render);
 
+      GoodoList.fetch();
+      
       Backbone.history.on('route',function(source, path){
         this.render(path);
       }, this);
@@ -75,6 +77,7 @@ define([
 
 
     render: function (path) {
+      console.log(GoodoList.localStorage);
       this.$('#header').prepend('<h1>'+Common.appName+'</H1>');
       // if(path === undefined){
       //   path = Backbone.history.fragment;
@@ -90,17 +93,12 @@ define([
 
       // Footer
       // this.$footer.html(this.footer);
-
       var completed = GoodoList.completed().length;
       var remaining = GoodoList.remaining().length;
+      
       if ( GoodoList.length ) {
         this.$main.show();
-        this.$footer.show();
-
-        this.$footer.html(this.template.stats.render({
-          completed: completed,
-          remaining: remaining
-        }));
+        this.defaultFooter(completed, remaining);
 
         this.$('#filters li a')
           .removeClass('selected')
@@ -108,10 +106,18 @@ define([
           .addClass('selected');
       } else {
         this.$main.hide();
-        this.$footer.hide();
+        this.defaultFooter();
       }
 
       this.allCheckbox.checked = !remaining;
+    },
+
+    defaultFooter: function(completed, remaining){
+      this.$footer.show();
+      this.$footer.html(this.template.stats.render({
+        completed: completed,
+        remaining: remaining
+      }));
     },
 
     /**

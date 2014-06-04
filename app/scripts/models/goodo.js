@@ -8,9 +8,6 @@ define([
 
   var Goodo = Backbone.Model.extend({
 
-    initialize: function() {
-    },
-
     /**
      * Default attributes ensure that each todo created has `title` and `completed` keys.
      */
