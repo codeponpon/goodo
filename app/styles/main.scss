@@ -184,6 +184,7 @@ label[for='toggle-all'] {
   position: relative;
   font-size: 24px;
   border-bottom: 1px dotted #ccc;
+  overflow: hidden;
 }
 
 #goodo-list li:last-child {
@@ -215,18 +216,36 @@ label[for='toggle-all'] {
   top: 0;
   bottom: 0;
   margin: auto 0;
+
+  -webkit-transform: translate3d(100%, 0, 0);
+  -moz-transform: translate3d(100%, 0, 0);
+  -ms-transform: translate3d(100%, 0, 0);
+  -o-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  -webkit-transition: all .1s;
+  -moz-transition: all .1s;
+  -o-transition: all .1s;
+  transition: all .1s;
+  margin-left: -112px;
+
   /* Mobile Safari */
   border: none;
   -webkit-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
   appearance: none;
+
+  background: #099acb !important;
+}
+
+#goodo-list li .view:hover > .toggle {
+  margin-left: -40px;
 }
 
 #goodo-list li .toggle:after {
   content: '✔';
   /* 40 + a couple of pixels visual adjustment */
-  line-height: 43px;
+  line-height: 58px;
   font-size: 20px;
   color: #d9d9d9;
   text-shadow: 0 -1px 0 #bfbfbf;
@@ -260,6 +279,10 @@ label[for='toggle-all'] {
   -moz-transition: width 300ms cubic-bezier(.25, .46, .45, .94);
   -o-transition: width 300ms cubic-bezier(.25, .46, .45, .94);
   transition: width 300ms cubic-bezier(.25, .46, .45, .94);
+}
+
+#goodo-list li.completed .toggle {
+  margin-left: -112px;
 }
 
 #goodo-list li.completed label:before {
@@ -406,7 +429,7 @@ label[for='toggle-all'] {
   }
 
   #goodo-list li .toggle {
-    height: 40px;
+    height: 58px;
   }
 
   #toggle-all {
