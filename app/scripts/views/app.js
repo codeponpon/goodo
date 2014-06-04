@@ -27,8 +27,6 @@ define([
       stats : new EJS({url: 'scripts/templates/stats.ejs'})
     },
 
-    footer   : JST['app/scripts/templates/footer.ejs'],
-
     /**
      * Delegated events for creating new items, and clearing completed ones.
      */
