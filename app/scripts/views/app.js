@@ -77,7 +77,6 @@ define([
 
 
     render: function (path) {
-      console.log(GoodoList.localStorage);
       this.$('#header').prepend('<h1>'+Common.appName+'</H1>');
       // if(path === undefined){
       //   path = Backbone.history.fragment;
